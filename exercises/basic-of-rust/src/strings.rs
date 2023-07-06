@@ -1,16 +1,17 @@
 // Exercise 1
 #[allow(dead_code)]
 fn exercise1(color: &str) -> String {
-    todo!()
+    // todo!()
+    color.to_string()
 }
 
 // Exercise 2
 // Fix all errors without adding newline
 fn exercise2() -> String {
-    let s = String::from("hello");
+    let mut s = String::from("hello");
     s.push(',');
-    s.push(" world");
-    s += "!".to_string();
+    s.push_str(" world");
+    s += &("!".to_string());
     s
 }
 // Exercise 3
@@ -18,7 +19,7 @@ fn exercise2() -> String {
 fn exercise3() -> String {
     let s1 = String::from("hello,");
     let s2 = String::from("world!");
-    let s3 = s1 + s2;
+    let s3 = s1 + " "+&s2;
     s3
 }
 
@@ -26,20 +27,38 @@ fn exercise3() -> String {
 // Reverse a string
 
 fn reverse_string(input: &str) -> String {
-    todo!()
+    // todo!()
+    let mut new_string = "".to_string();
+    let length = input.len();
+    for i in 1..=length {
+        new_string.push(input.chars().nth(length-i).unwrap());
+    }
+    new_string
 }
 
 
 // Exercise 5
 // Check if a string is a palindrome
 fn is_palindrome(word: &str) -> bool {
-    todo!()
+    // todo!()
+    let new_string = reverse_string(&word); 
+    if new_string.to_lowercase()== word.to_ascii_lowercase() {
+        return true;
+    }
+    false
 }
 
 // Exercise 6
 // Count the occurrences of a character in a string
 fn count_char_occurrences(string: &str, ch: char) -> usize {
-    todo!()
+    // todo!()
+    let mut counter = 0;
+    for i in 0..string.len() {
+        if string.chars().nth(i).unwrap() == ch {
+            counter +=1;
+        }
+    }
+    counter
 }
 
 #[cfg(test)]
@@ -92,7 +111,7 @@ mod tests {
     #[test]
     fn test_count_char_occurrences() {
         assert_eq!(count_char_occurrences("Hello", 'l'), 2);
-        assert_eq!(count_char_occurrences("Rust is fun", 'u'), 1);
+        assert_eq!(count_char_occurrences("Rust is fun", 'u'), 2);
         assert_eq!(count_char_occurrences("Mississippi", 's'), 4);
     }
 
